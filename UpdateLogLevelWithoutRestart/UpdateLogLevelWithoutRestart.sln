@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31402.337
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateLogLevelWithoutRestart", "UpdateLogLevelWithoutRestart\UpdateLogLevelWithoutRestart.csproj", "{F50DA60C-1446-4092-8722-B027EFF66291}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F50DA60C-1446-4092-8722-B027EFF66291}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F50DA60C-1446-4092-8722-B027EFF66291}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F50DA60C-1446-4092-8722-B027EFF66291}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F50DA60C-1446-4092-8722-B027EFF66291}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BEB2A1B4-A84C-4BFF-975C-C41CA3FA21BE}
+	EndGlobalSection
+EndGlobal

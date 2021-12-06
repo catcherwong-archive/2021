@@ -4,7 +4,7 @@
     {
         public void Do()
         {
-            Console.WriteLine($"{nameof(SimpleClass)}-Do");
+            Console.WriteLine($"{nameof(SimpleInterface)}-Do");
         }
     }
 }

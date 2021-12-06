@@ -92,5 +92,80 @@
 
             Console.WriteLine($"End {nameof(Abst_Case)}\n");
         }
+
+
+        internal static void GetServiceOrCreateInstance_Should_CallGetService()
+        {
+            Console.WriteLine($"Begin {nameof(GetServiceOrCreateInstance_Should_CallGetService)}");
+
+            IServiceCollection services = new ServiceCollection();
+            services.AddTransient<ISimpleInterface, SimpleInterface>();
+            var provider = services.BuildServiceProvider();
+
+            var obj = ActivatorUtilities.GetServiceOrCreateInstance<ISimpleInterface>(provider);
+            obj.Do();
+
+            Console.WriteLine($"End {nameof(GetServiceOrCreateInstance_Should_CallGetService)}\n");
+        }
+
+        internal static void GetServiceOrCreateInstance_Will_CreateInstance()
+        {
+            Console.WriteLine($"Begin {nameof(GetServiceOrCreateInstance_Will_CreateInstance)}");
+
+            IServiceCollection services = new ServiceCollection();
+            var provider = services.BuildServiceProvider();
+
+            var obj = ActivatorUtilities.GetServiceOrCreateInstance(provider, typeof(SimpleInterface));
+            ((ISimpleInterface)obj).Do();
+
+            Console.WriteLine($"End {nameof(GetServiceOrCreateInstance_Will_CreateInstance)}\n");
+        }
+
+        internal static void CreateFactory_Case()
+        {
+            Console.WriteLine($"Begin {nameof(CreateFactory_Case)}");
+
+            IServiceCollection services = new ServiceCollection();
+            var provider = services.BuildServiceProvider();
+
+            try
+            {
+                var factory = ActivatorUtilities.CreateFactory(typeof(SimpleClass), Type.EmptyTypes);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            var factory2 = ActivatorUtilities.CreateFactory(typeof(SimpleClass), new Type[] { typeof(int) });
+            var obj2 = factory2.Invoke(provider, new object[] { 99 });
+            ((SimpleClass)obj2).Do();
+
+            var factory3 = ActivatorUtilities.CreateFactory(typeof(SimpleClass2), new Type[] { typeof(int), typeof(bool) });
+            var obj3 = factory3.Invoke(provider, new object[] { 100, false });
+            ((SimpleClass2)obj3).Do();
+
+            try
+            {
+                var factory4 = ActivatorUtilities.CreateFactory(typeof(SimpleClass2), Type.EmptyTypes);
+                factory4.Invoke(provider, Array.Empty<Type>());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            try
+            {
+                var factory5 = ActivatorUtilities.CreateFactory(typeof(SimpleClass2), new Type[] { typeof(int) });
+                var obj5 = factory5.Invoke(provider, new object[] { 120 });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            Console.WriteLine($"End {nameof(CreateFactory_Case)}\n");
+        }
     }
 }

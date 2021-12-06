@@ -1,4 +1,4 @@
-﻿namespace ActivatorUtilitiesDemo
+﻿namespace DebugDemo
 {
     using System;
 
@@ -22,6 +22,6 @@
             DependencyCase.CreateFactory_Case();
 
             Console.ReadKey();
-        }        
+        }
     }
 }

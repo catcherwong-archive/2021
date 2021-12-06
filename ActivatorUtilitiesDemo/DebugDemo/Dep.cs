@@ -1,7 +1,94 @@
-﻿namespace ActivatorUtilitiesDemo
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace DebugDemo
 {
-    using Microsoft.Extensions.DependencyInjection;
-    using System;
+    internal interface IAClass
+    {
+        void Do();
+    }
+
+    internal class AClass : IAClass
+    {
+        public void Do()
+        {
+            Console.WriteLine($"{nameof(AClass)}-Do");
+        }
+    }
+
+    internal class DependencyClass
+    {
+        private readonly int _num = 0;
+        private readonly IAClass _aClass;
+
+        public DependencyClass(IAClass aClass)
+        {
+            _num = 1;
+            _aClass = aClass;
+        }
+
+        public DependencyClass(int n, IAClass aClass)
+        {
+            _num = n;
+            _aClass = aClass;
+        }
+
+        public DependencyClass(IAClass aClass, int n, bool flag)
+        {
+            _num = n;
+            _aClass = aClass;
+            Console.WriteLine("====" + flag);
+        }
+
+        public DependencyClass(IAClass aClass, int n, int n2)
+        {
+            _num = n2;
+            _aClass = aClass;
+            Console.WriteLine("====" + n);
+        }
+
+        public void Do()
+        {
+            Console.WriteLine(_num);
+            _aClass.Do();
+        }
+    }
+
+    internal class DependencyClass2
+    {
+        private readonly int _num = 0;
+        private readonly IAClass _aClass;
+
+        public DependencyClass2(IAClass aClass)
+        {
+            _num = 1;
+            _aClass = aClass;
+        }
+
+        public void Do()
+        {
+            Console.WriteLine($"{nameof(DependencyClass2)}-{_num}");
+            _aClass.Do();
+        }
+    }
+
+    internal class DependencyClass3
+    {
+        private readonly int _num = 0;
+        private readonly IAClass _aClass;
+
+        public DependencyClass3(IAClass aClass, int n, bool flag)
+        {
+            _num = n;
+            _aClass = aClass;
+            Console.WriteLine("====" + flag);
+        }
+
+        public void Do()
+        {
+            Console.WriteLine($"{nameof(DependencyClass3)}-{_num}");
+            _aClass.Do();
+        }
+    }
 
     internal static class DependencyCase
     {
@@ -93,7 +180,7 @@
             services.AddTransient<IAClass, AClass>();
             var provider = services.BuildServiceProvider();
 
-            var factory = ActivatorUtilities.CreateFactory(typeof(DependencyClass2), Type.EmptyTypes);
+            /*var factory = ActivatorUtilities.CreateFactory(typeof(DependencyClass2), Type.EmptyTypes);
             var obj = factory.Invoke(provider, Array.Empty<Type>());
             ((DependencyClass2)obj).Do();
 
@@ -105,7 +192,7 @@
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-            }
+            }*/
 
             var factory3 = ActivatorUtilities.CreateFactory(typeof(DependencyClass3), new Type[] { typeof(int), typeof(bool) });
             var obj3 = factory3.Invoke(provider, new object[] { 100, false });

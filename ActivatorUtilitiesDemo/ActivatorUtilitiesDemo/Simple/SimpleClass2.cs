@@ -24,7 +24,7 @@
 
         public void Do()
         {
-            Console.WriteLine($"{nameof(SimpleClass)}-Do-{num}");
+            Console.WriteLine($"{nameof(SimpleClass2)}-Do-{num}");
         }
     }
 }
